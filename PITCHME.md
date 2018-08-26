@@ -78,8 +78,7 @@ output = cube(inp)
 @ul
 * If you define modules in other modules, pytorch automatically recognizes them and adds them to a module list.
 * The parameters of the parent module also include those of the submodule.
-* Allows for hierarchical structure of networks
-* Example - can have a hierarchy of modules like
+* Allows for hierarchical structure of networks like
     - one layer of convs with a residual connnection
     - a set of such layers with the same channel inputs and outputs
     - cascading such blocks with different channels
@@ -184,7 +183,7 @@ Store and see everything about every run of your experiment
 @ul
 * `sacred` makes it extremely easy to write reproducible experiments. It keeps track of:
     * All the config variables you defined
-    * Everything about the machine you ran the experiement on
+    * Everything about the machine you ran the experiment on
     * Any metrics your experiment generated
 @ulend  
 +++
@@ -194,7 +193,7 @@ Store and see everything about every run of your experiment
     * I wrote a small [package](https://github.com/rajatvd/VisdomObserver) to integrate this with `sacred`
 
 * Allows you to focus on the important part of your workflow - coding the experiments, not wasting time on saving stuff and writing code for plotting
-* You don't have to use pytorch, this stuff is purely for improving your workflow, so go ahead and use this with tensorflow _shudders_
+* You don't have to use pytorch, this stuff is purely for improving your workflow, so go ahead and try this out with tensorflow _shudders_
 @ulend
 ---
 ## Thank you
