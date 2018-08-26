@@ -25,7 +25,7 @@ Pytorch follows the principles of _Object Oriented Programming_
 * Use torch apis like `data` and `optim` to train them
 @ulend
 
-+++
+---
 ## Modules
 The basic unit of any network is a module.
 
@@ -37,7 +37,7 @@ The basic unit of any network is a module.
     * No sessions, placeholders or feed\_dicts
 @ulend
 
-+++
+---
 ```
 class Power(nn.Module):
     def __init__(self, exponent):
@@ -54,7 +54,7 @@ class Power(nn.Module):
 @[4](Create an instance variable)
 @[6,7](`forward` takes in input tensor, and should return the output tensor)
 
-+++
+---
 ```
 cube = Power(3)
 
@@ -64,7 +64,7 @@ output = cube(inp)
 
 @[1](Create an instance of the module, passing in stuff for the init funciton)
 @[3,4](The instance is a callable, so just call it on tensors to get outputs)
-+++
+---
 
 @ul
 * Calling modules also builds the computation graph, so you can backward through them
@@ -72,7 +72,7 @@ output = cube(inp)
 * Modules can also have `parameters` which can be trained.
 @ulend
 
-+++
+---
 ## Sub modules
 
 @ul
@@ -127,7 +127,7 @@ _Declarative vs Imperative_
 
 @ulend
 
-+++
+---
 ## Benefits of dynamic graphs
 
 @ul
@@ -137,7 +137,7 @@ _Declarative vs Imperative_
 * Can build some models which are impossible with static graphs
 
 @ulend
-+++
+---
 ## Examples of using dynamic graphs
 @ul
 * RNNs with variable length inputs are inherently dynamic
@@ -145,7 +145,7 @@ _Declarative vs Imperative_
     * Have a random number of linear layers between 1 and 4 for each pass through the network
     * Make them share weights
 @ulend
-+++
+---
 ## Some problems
 
 @ul
@@ -159,14 +159,14 @@ _Declarative vs Imperative_
 * Of course, keras is much easier to code with.
 * But it doesn't offer the flexibility of pytorch or tensorflow
 @ulend
-+++
+---
 @ul
 * If you don't want to write for loops to train - just use my [utils](https://github.com/rajatvd/PytorchUtils) :P
     * Attempts to abstract out only the training part, while letting you still get comfy with the gradients.
     * No restrictive `fit` method - meaning you have to write the backward and step calls yourself
 * Don't forget, keras doesn't have dynamic graphs too (tf.eager works, but I like my dynamic graphs without the baggage of 10 other APIs)
 @ulend
-+++
+---
 ## The verdict
 @ul
 * Pytorch is great for writing experiments and testing out ideas.
@@ -186,12 +186,13 @@ Store and see everything about every run of your experiment
     * Everything about the machine you ran the experiment on
     * Any metrics your experiment generated
 @ulend  
-+++
+---
 @ul
 Visdom is a visualization tool similar to tensorboard
 ![visdom_big](https://lh3.googleusercontent.com/-bqH9UXCw-BE/WL2UsdrrbAI/AAAAAAAAnYc/emrxwCmnrW4_CLTyyUttB0SYRJ-i4CCiQCLcB/s0/Screen+Shot+2017-03-06+at+10.51.02+AM.png"visdom_big")
 
-+++
+---
+@ul
 * Tensorboard can also be made to work with pytorch, but it's a bit finicky
     * TensorboardX is a good alternative too
 * I wrote a small [package](https://github.com/rajatvd/VisdomObserver) to integrate visdom with `sacred`
