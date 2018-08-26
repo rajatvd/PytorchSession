@@ -31,6 +31,7 @@ The basic unit of any network is a module.
 
 @ul
 * You have to define the forward function
+    * You can use native python conditonals and loops!
 * autograd automatically defines the backward for you
 * Just instantiate the module, and _call_ it on inputs to get your outputs
     * No sessions, placeholders or feed\_dicts
@@ -58,7 +59,7 @@ inp = torch.randn(100)
 output = cube(inp)
 ```
 
-@[1](Create an instance of the module, passing in variables for the init funciton)
+@[1](Create an instance of the module, passing in stuff for the init funciton)
 @[3,4](The instance is a callable, so just call it on tensors to get outputs)
 +++
 
@@ -87,6 +88,8 @@ output = cube(inp)
 * Create a `Dataset` class which needs to have a `__getitem__` function.
 * Make `DataLoader` objects from `Dataset`s which are iterators through the dataset.
 * Can use multiprocessing to load data
+* Replicate your model across the batch dimension over multiple gpus with literally one line:
+`model = nn.DataParallel(model)`
 @ulend
 
 ---
@@ -111,39 +114,82 @@ for images, labels in image_data_loader:
 ---
 ## Dynamic graphs
 
+_Declarative vs Imperative_
+
 @ul
 
-* Build the computation graph on the fly
-* The graph is built every time you run the model/module
+* Computation = run
+* The computation graph is built every time you run the model/module
 * Gradients are also calculated dynamically
+
 
 @ulend
 
 +++
-Benefits of dynamic graphs
+## Benefits of dynamic graphs
 
 @ul
-* More intuitive to code
-* Much easier to debug
-    * Just treat it like a normal python program
+* Linear flow of the program
+    * More intuitive to code
+    * Much easier to debug - ust treat it like a normal python program
 * Can build some models which are impossible with static graphs
 
 @ulend
++++
+## Examples of using dynamic graphs
+* RNNs with variable length inputs are inherently dynamic
+* Can build crazy networks like:
+    * Have a random number of linear layers between 1 and 4 for each pass through the network
+    * Make them share weights
++++
+## Some problems
+
+@ul
+* Can't perform static optimizations\*
+* Can't compile because you don't know what ops are going to be done
+@ulend
+
+\* torch jit can solve this problem
 ---
-## More pythonic you say?
-It's an easy to answer to give when someone asks why pytorch - it's _pythonic_.
-
-But what does that really mean?
+## I'll just use keras
+* Of course, keras is much easier to code with.
+* But it doesn't offer the flexibility of pytorch or tensorflow
+* If you don't want to write for loops to train - just use my [utils](https://github.com/rajatvd/PytorchUtils)
+    * Attempts to abstract out only the training part, while letting you still get comfy with the gradients.
+    * No restrictive `fit` method - meaning you have to write the backward and step calls yourself
+* Don't forget, keras doesn't have dynamic graphs too (tf.eager works, but I like my dynamic graphs without the baggage of 10 other APIs)
 
 +++
-Good python is:
+## The verdict
+@ul
+* Pytorch is great for writing experiments and testing out ideas.
+* It is super easy and fast to get the idea in your head to the GPUs in the workstation
+* Not yet ideal for deploying stuff to production, but 1.0 will mostly change that with the jit
+* For deploying highly optimized models for industry, tensorflow is probably the way to go, for now.
+* Pytorch wins for research and experimentation.
+@ulend
+---
+## Sacred Visdom 
 
-* Simple code.
-* Easy to read, and easy to understand.
-* Does what you would expect, even if it's the first time you're seeing it.
-* Easy to debug.
+Store and see everything about every run of your experiment
 
-Let's see how these play out for pytorch
-+++
+@ul
+* `sacred` makes it extremely easy to write reproducible experiments. It keeps track of:
+    * All the config variables you defined
+    * Everything about the machine you ran the experiement on
+    * Any metrics your experiment generated
+* `visdom` is a visualization tool like tensorboard
+    * You can use this or something like tensorboardX
+    * I wrote a small [package](https://github.com/rajatvd/VisdomObserver) to integrate this with `sacred`
+
+* Allows you to focus on the important part of your workflow - coding the experiments, not wasting time on saving stuff and writing code for plotting
+* You don't have to use pytorch, this stuff is purely for improving your workflow, so go ahead and use this with tensorflow _shudders_
+
+---
+## Thank you
+Check my github `rajatvd` for the slides and the other packages I talked about.
+High quality tutorials for a __wide__ range of topics including RL, NLP, etc can be found in the official pytorch website [here](https://pytorch.org/tutorials/index.html)
+Go through them to get an idea of you would implement specific types of models and networks.
 
 
+The end
