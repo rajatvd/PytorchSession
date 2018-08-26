@@ -1,14 +1,14 @@
-# Why PyTorch?
+## Why PyTorch?
 _Rajat V D_
 
 This session provides a broad overview of how PyTorch is different, and why it might be a good idea to switch to it.
 
 Use the very well written tutorial [here](https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html) for a detailed walkthrough of pytorch from scratch.
 ---
-# More pythonic you say?
-It's an easy to answer to give when someone asks why pytorch - it's beutifully _pythonic_.
+## More pythonic you say?
+It's an easy to answer to give when someone asks why pytorch - it's beautifully _pythonic_.
 
-But what does that mean?
+But what does that really mean?
 
 +++
 Good python is:
