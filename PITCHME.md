@@ -91,8 +91,7 @@ output = cube(inp)
 * Create a `Dataset` class which needs to have a `__getitem__` function.
 * Make `DataLoader` objects from `Dataset`s which are iterators through the dataset.
 * Can use multiprocessing to load data
-* Replicate your model across the batch dimension over multiple gpus with literally one line:
-`model = nn.DataParallel(model)`
+* Replicate your model across the batch dimension over multiple gpus with literally one line:`model = nn.DataParallel(model)`
 @ulend
 
 ---
@@ -134,34 +133,39 @@ _Declarative vs Imperative_
 @ul
 * Linear flow of the program
     * More intuitive to code
-    * Much easier to debug - ust treat it like a normal python program
+    * Much easier to debug - just treat it like a normal python program
 * Can build some models which are impossible with static graphs
 
 @ulend
 +++
 ## Examples of using dynamic graphs
+@ul
 * RNNs with variable length inputs are inherently dynamic
 * Can build crazy networks like:
     * Have a random number of linear layers between 1 and 4 for each pass through the network
     * Make them share weights
+@ulend
 +++
 ## Some problems
 
 @ul
-* Can't perform static optimizations\*
-* Can't compile because you don't know what ops are going to be done
+* Can't compile because you don't know what ops are going to be done 
+* Can't perform static optimizations (torch jit can solve this problem)
 @ulend
 
-\* torch jit can solve this problem
 ---
 ## I'll just use keras
+@ul
 * Of course, keras is much easier to code with.
 * But it doesn't offer the flexibility of pytorch or tensorflow
+@ulend
++++
+@ul
 * If you don't want to write for loops to train - just use my [utils](https://github.com/rajatvd/PytorchUtils)
     * Attempts to abstract out only the training part, while letting you still get comfy with the gradients.
     * No restrictive `fit` method - meaning you have to write the backward and step calls yourself
 * Don't forget, keras doesn't have dynamic graphs too (tf.eager works, but I like my dynamic graphs without the baggage of 10 other APIs)
-
+@ulend
 +++
 ## The verdict
 @ul
@@ -181,18 +185,22 @@ Store and see everything about every run of your experiment
     * All the config variables you defined
     * Everything about the machine you ran the experiement on
     * Any metrics your experiment generated
+@ulend  
++++
+@ul
 * `visdom` is a visualization tool like tensorboard
     * You can use this or something like tensorboardX
     * I wrote a small [package](https://github.com/rajatvd/VisdomObserver) to integrate this with `sacred`
 
 * Allows you to focus on the important part of your workflow - coding the experiments, not wasting time on saving stuff and writing code for plotting
 * You don't have to use pytorch, this stuff is purely for improving your workflow, so go ahead and use this with tensorflow _shudders_
-
+@ulend
 ---
 ## Thank you
-Check my github `rajatvd` for the slides and the other packages I talked about.
-High quality tutorials for a __wide__ range of topics including RL, NLP, etc can be found in the official pytorch website [here](https://pytorch.org/tutorials/index.html)
-Go through them to get an idea of you would implement specific types of models and networks.
+Check out my github `rajatvd` for the slides and the other packages I talked about.  
 
+High quality tutorials for a __wide__ range of topics including RL, NLP, etc can be found in the official pytorch website [here](https://pytorch.org/tutorials/index.html)  
+
+Go through them to get an idea of you would implement specific types of models and networks.
 
 The end
