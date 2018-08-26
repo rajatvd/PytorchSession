@@ -91,7 +91,8 @@ output = cube(inp)
 * Create a `Dataset` class which needs to have a `__getitem__` function.
 * Make `DataLoader` objects from `Dataset`s which are iterators through the dataset.
 * Can use multiprocessing to load data
-* Replicate your model across the batch dimension over multiple gpus with literally one line:`model = nn.DataParallel(model)`
+* Replicate your model across the batch dimension over multiple gpus with literally one line:
+    * `model = nn.DataParallel(model)`
 @ulend
 
 ---
@@ -161,7 +162,7 @@ _Declarative vs Imperative_
 @ulend
 +++
 @ul
-* If you don't want to write for loops to train - just use my [utils](https://github.com/rajatvd/PytorchUtils)
+* If you don't want to write for loops to train - just use my [utils](https://github.com/rajatvd/PytorchUtils) :P
     * Attempts to abstract out only the training part, while letting you still get comfy with the gradients.
     * No restrictive `fit` method - meaning you have to write the backward and step calls yourself
 * Don't forget, keras doesn't have dynamic graphs too (tf.eager works, but I like my dynamic graphs without the baggage of 10 other APIs)
@@ -172,7 +173,7 @@ _Declarative vs Imperative_
 * Pytorch is great for writing experiments and testing out ideas.
 * It is super easy and fast to get the idea in your head to the GPUs in the workstation
 * Not yet ideal for deploying stuff to production, but 1.0 will mostly change that with the jit
-* For deploying highly optimized models for industry, tensorflow is probably the way to go, for now.
+* For deploying highly optimized models for industry, tensorflow is the way to go, for now.
 * Pytorch wins for research and experimentation.
 @ulend
 ---
@@ -201,6 +202,6 @@ Check out my github `rajatvd` for the slides and the other packages I talked abo
 
 High quality tutorials for a __wide__ range of topics including RL, NLP, etc can be found in the official pytorch website [here](https://pytorch.org/tutorials/index.html)  
 
-Go through them to get an idea of you would implement specific types of models and networks.
+Go through them to get an idea of how you would implement specific types of models and networks.
 
 The end
