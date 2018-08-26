@@ -194,6 +194,7 @@ Store and see everything about every run of your experiment
 
 * Allows you to focus on the important part of your workflow - coding the experiments, not wasting time on saving stuff and writing code for plotting
 * You don't have to use pytorch, this stuff is purely for improving your workflow, so go ahead and try this out with tensorflow _shudders_
+* I'd love some feedback!
 @ulend
 ---
 ## Thank you
