@@ -41,7 +41,7 @@ The basic unit of any network is a module.
 class Power(nn.Module):
     def __init__(self, exponent):
         self.exponent = exponent
-        
+
     def forward(self, input):
         return input**self.exponent
 ```
@@ -50,6 +50,64 @@ class Power(nn.Module):
 @[2,3](The init function is called when you make an instance. Set up instance variables)
 @[5,6](`forward` takes in input tensor, and should return the output tensor)
 
++++
+```
+cube = Power(3)
+
+inp = torch.randn(100)
+output = cube(inp)
+```
+
+@[1](Create an instance of the module, passing in variables for the init funciton)
+@[3,4](The instance is a callable, so just call it on tensors to get outputs)
++++
+
+@ul
+* Calling modules also builds the computation graph, so you can backward through them
+* Allows you to easily modularize your network and code
+* Modules can also have `parameters` which can be trained.
+@ulend
+
++++
+## Sub modules
+
+@ul
+* If you define modules in other modules, pytorch automatically recognizes them and adds them to a module list.
+* The parameters of the parent module also include those of the submodule.
+* Allows for hierarchical structure of networks
+* Example - can have a hierarchy of modules like
+    - one layer of convs with a residual connnection
+    - a set of such layers with the same channel inputs and outputs
+    - cascading such blocks with different channels
+@ulend
+---
+## What about data?
+@ul
+* `torch.utils.data`
+* Create a `Dataset` class which needs to have a `__getitem__` function.
+* Make `DataLoader` objects from `Dataset`s which are iterators through the dataset.
+* Can use multiprocessing to load data
+@ulend
+
+---
+## Training
+```
+optimizer = torch.optim.SGD(net.parameters())
+for images, labels in image_data_loader:
+    outputs = net(images)
+    loss = loss_fn(outputs, labels)
+    
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+```
+
+@[1](Make an optimizer linked with your net's parameters)
+@[2](Simple for loop over a `DataLoader`)
+@[3,4](Forward pass to find loss function. This step builds the graph)
+@[6](Remember that `backward` accumulates gradients, so zero before calling it)
+@[7](Find the gradients of all leaves in the built graph w.r.t loss. This also destroys the built graph unless you specify to retain it)
+@[8](Perform one optimization step using the calculated gradients)
 ---
 ## Dynamic graphs
 
