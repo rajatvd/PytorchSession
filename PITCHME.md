@@ -188,9 +188,13 @@ Store and see everything about every run of your experiment
 @ulend  
 +++
 @ul
-* `visdom` is a visualization tool like tensorboard
-    * You can use this or something like tensorboardX
-    * I wrote a small [package](https://github.com/rajatvd/VisdomObserver) to integrate this with `sacred`
+Visdom is a visualization tool similar to tensorboard
+![visdom_big](https://lh3.googleusercontent.com/-bqH9UXCw-BE/WL2UsdrrbAI/AAAAAAAAnYc/emrxwCmnrW4_CLTyyUttB0SYRJ-i4CCiQCLcB/s0/Screen+Shot+2017-03-06+at+10.51.02+AM.png"visdom_big")
+
++++
+* Tensorboard can also be made to work with pytorch, but it's a bit finicky
+    * TensorboardX is a good alternative too
+* I wrote a small [package](https://github.com/rajatvd/VisdomObserver) to integrate visdom with `sacred`
 
 * Allows you to focus on the important part of your workflow - coding the experiments, not wasting time on saving stuff and writing code for plotting
 * You don't have to use pytorch, this stuff is purely for improving your workflow, so go ahead and try this out with tensorflow _shudders_
