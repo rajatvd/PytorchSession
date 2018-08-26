@@ -41,6 +41,7 @@ The basic unit of any network is a module.
 ```
 class Power(nn.Module):
     def __init__(self, exponent):
+        super().__init__()
         self.exponent = exponent
 
     def forward(self, input):
@@ -48,8 +49,10 @@ class Power(nn.Module):
 ```
 
 @[1](Subclass nn.Module)
-@[2,3](The init function is called when you make an instance. Set up instance variables)
-@[5,6](`forward` takes in input tensor, and should return the output tensor)
+@[2,3,4](The init function is called when you make an instance)
+@[3](Call the init of the superclass `nn.Module`)
+@[4](Create an instance variable)
+@[6,7](`forward` takes in input tensor, and should return the output tensor)
 
 +++
 ```
